@@ -32,7 +32,16 @@ class User(db.Model):
     win = db.Column(db.Integer)  # 胜利局数
     fail = db.Column(db.Integer)  # 失败局数
     background = db.Column(db.String(50))
-    
+
+
+class Roster(db.Model):  #花名册
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50))  # 名称
+    code = db.Column(db.String(8))  # 班号
+    number = db.Column(db.String(50))  # 身份证
+    sex = db.Column(db.String(2))  # 性别
+
+
 if __name__ == '__main__':
     # app.run(host='0.0.0.0', debug=False,
     #         ssl_context=('cert.pem', 'privkey.pem'))
