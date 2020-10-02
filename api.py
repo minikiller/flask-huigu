@@ -11,10 +11,12 @@
 from model import app
 from child import child_api
 from user import user_api
+from roster import roster_api
 
 
 app.register_blueprint(user_api, url_prefix='/users')
 app.register_blueprint(child_api, url_prefix='/childs')
+app.register_blueprint(roster_api, url_prefix='/rosters')
 
 
 if __name__ == '__main__':

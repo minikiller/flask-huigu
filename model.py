@@ -1,10 +1,12 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os
+from flask_cors import CORS
+
 
 app = Flask(__name__, static_folder='static',)
 #  Cross Origin Resource Sharing
-# CORS(app, expose_headers=["x-suggested-filename"])
+CORS(app, expose_headers=["x-suggested-filename"])
 
 app.config['SECRET_KEY'] = 'thisissecret'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
