@@ -147,15 +147,14 @@ def addUser():
     if not user:
         hashed_password = generate_password_hash(
             data['password'], method='sha256')
-        avatar = "http://sunlingfeng.0431zy.com/1.png"
         now_time = datetime.datetime.now()
         new_user = User(
             public_id=str(uuid.uuid4()),
             name=data['name'],
             password=hashed_password,
-            email=data['email'],
-            mobile=data['mobile'],
-            rank=data['rank'],
+            fullname=data['fullname'],
+            parent=data['parent'],
+            roster_id=data['roster_id'],
             isadmin=False,
             create_date=now_time,
         )
