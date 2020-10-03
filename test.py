@@ -1,5 +1,8 @@
 from openpyxl import load_workbook
 from model import db, Roster
+
+""" 从excel文件导入学生的花名册
+"""
 workbook = load_workbook(filename="roster.xlsx")
 print(workbook.sheetnames)
 sheet = workbook.active

@@ -8,10 +8,12 @@ import jwt
 import datetime
 from functools import wraps
 
- 
+
 from user import user_api
-from model import User, db, app
- 
+from model import User, db, app, Roster
+from log import logger
+
+
 def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
@@ -36,8 +38,6 @@ def token_required(f):
 
     return decorated
 
-
- 
 
 # 获得所有用户
 
@@ -232,10 +232,15 @@ def login():
 
     if check_password_hash(user.password, auth.password):
         token = jwt.encode({'public_id': user.public_id, 'exp': datetime.datetime.utcnow(
-        ) + datetime.timedelta(minutes=60*24)}, app.config['SECRET_KEY'])
-        _rank = rank.get(user.rank, "级别不详")
-        result = {'token': token.decode('UTF-8'), 'public_id': user.public_id, 'user_id': user.id, 'win': user.win, 'fail': user.fail,
-                  'name': user.name, 'avatar': user.avatar, 'isadmin': user.isadmin, 'rank': _rank, 'background': user.background}
+        ) + datetime.timedelta(minutes=60* 24)}, app.config['SECRET_KEY'])
+        # 组成“孙圣妍-爸爸”的全名称
+        roster = Roster.query.filter_by(id=user.roster_id).first()
+        _parent = "爸爸" if user.parent == "father" else "妈妈"
+        fullname = roster.name+"-"+_parent
+        result = {'token': token.decode('UTF-8'), 'public_id': user.public_id, 'user_id': user.id,
+                  'name': user.name, 'isadmin': user.isadmin, 'parent': user.parent,
+                  'roster_id': user.roster_id,
+                  'fullname': fullname}
         logger.info("a user is log in, name is {}, ip is {}".format(
             auth.username, request.remote_addr))
         return jsonify(result)
@@ -255,6 +260,3 @@ def change_password_user(current_user):
     db.session.commit()
 
     return jsonify({'message': '密码修改成功'})
-
-
-
