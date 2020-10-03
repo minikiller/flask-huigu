@@ -25,6 +25,29 @@ def setRosterData(roster_data,roster):
     roster_data['id'] = roster.id
     roster_data['name'] = roster.name
     roster_data['code'] = roster.code
+    roster_data['number'] = roster.number
+    roster_data['sex'] = roster.sex
+
+# 用于vue-select选择框进行学生的选择查询
+@roster_api.route('/data', methods=['GET'])
+def data():
+    # here we want to get the value of user (i.e. ?user=some-value)
+    output = []
+    roster = request.args.get('roster')
+    roster = roster.replace('%', '\\').encode().decode('unicode-escape')
+
+    if roster == "":
+        return jsonify(output)
+    else:
+        rosters = Roster.query.filter(
+            Roster.name.like("%{}%".format(roster))).all()
+
+    for roster in rosters:
+        roster_data = {}
+        setSelectUserData(roster_data, roster)
+        output.append(roster_data)
+
+    return jsonify(output)
 
 
 

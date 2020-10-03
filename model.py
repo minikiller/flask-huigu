@@ -23,20 +23,15 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     public_id = db.Column(db.String(50), unique=True)
     name = db.Column(db.String(50))         # 登陆用的用户名
+    fullname = db.Column(db.String(50))     # 登陆用的真实名
     password = db.Column(db.String(20))     # 密码
-    mobile = db.Column(db.String(20))       # 手机号码
-    email = db.Column(db.String(50))        # 电子邮件地址
-    rank = db.Column(db.Integer)            # 级别：-25K ～ 9D
-    lefttimes = db.Column(db.Integer)       # 用户使用对局室的剩余时间
-    isadmin = db.Column(db.Boolean)         # 系统管理员
-    avatar = db.Column(db.String(200))             # 用户头像照片
+    parent = db.Column(db.String(20))         # 父母
+    isadmin = db.Column(db.Boolean)  # 系统管理员
+    roster_id = db.Column(db.Integer)  # roster id
     create_date = db.Column(db.DateTime)
-    win = db.Column(db.Integer)  # 胜利局数
-    fail = db.Column(db.Integer)  # 失败局数
-    background = db.Column(db.String(50))
 
 
-class Roster(db.Model):  #花名册
+class Roster(db.Model):  # 花名册
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))  # 名称
     code = db.Column(db.String(8))  # 班号

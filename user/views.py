@@ -12,16 +12,6 @@ from functools import wraps
 from user import user_api
 from model import User, db, app
  
-
-rank = {1: "业余1段",
-        2: "业余2段",
-        3: "业余3段",
-        4: "业余4段",
-        5: "业余5段",
-        6: "业余6段",
-        7: "业余7段"}
-
-
 def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
@@ -167,18 +157,14 @@ def addUser():
             mobile=data['mobile'],
             rank=data['rank'],
             isadmin=False,
-            avatar=avatar,
             create_date=now_time,
-            win=0,
-            fail=0,
-            background='wood_1024.jpg'
         )
 
         db.session.add(new_user)
         db.session.commit()
-        return jsonify({'message': 'New user created!'})
+        return jsonify({'message': '用户创建成功!'})
     else:
-        return jsonify({'message': 'Name already exist!'})
+        return jsonify({'message': '用户名称已经存在'})
 
 
 @ user_api.route('/<public_id>', methods=['PUT'])
