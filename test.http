@@ -18,3 +18,14 @@ Content-Type: application/json
 ### 用户登陆
 GET http://192.168.1.29:5000/login HTTP/1.1
 Authorization: Basic admin:123
+
+
+### 用户登陆
+POST  http://192.168.1.29:5000/users/changepassword HTTP/1.1
+Content-Type: application/json
+x-access-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdWJsaWNfaWQiOiJkN2I2MmFiYi1mZmM5LTQ4MjQtODQwNy02ODY4MjA5OGZjYmQiLCJleHAiOjE2MDIxNDU5OTJ9.cmbAidxlDy4oSOlUXX_pmVQc8ZfjoXA1HEl3Boa8d4A
+
+
+{
+    "password":"1234"
+    }
