@@ -29,3 +29,8 @@ x-access-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdWJsaWNfaWQiOiJkN2I2MmF
 {
     "password":"1234"
     }
+
+
+### 用户登陆
+GET  http://192.168.1.29:5000/rosters/2 HTTP/1.1
+x-access-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdWJsaWNfaWQiOiJkN2I2MmFiYi1mZmM5LTQ4MjQtODQwNy02ODY4MjA5OGZjYmQiLCJleHAiOjE2MDIxNDU5OTJ9.cmbAidxlDy4oSOlUXX_pmVQc8ZfjoXA1HEl3Boa8d4A
